@@ -54,12 +54,12 @@
             this.btnXoa = new DevExpress.XtraEditors.SimpleButton();
             this.btnThemKH = new DevExpress.XtraEditors.SimpleButton();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.btnUpdateHinhAnh = new DevExpress.XtraEditors.SimpleButton();
             this.btnHuy = new DevExpress.XtraEditors.SimpleButton();
             this.btnLuu = new DevExpress.XtraEditors.SimpleButton();
             this.dtmNgaySinh = new DevExpress.XtraEditors.DateEdit();
             this.cboGioiTinh = new DevExpress.XtraEditors.ComboBoxEdit();
             this.btnDuyetAnh = new DevExpress.XtraEditors.SimpleButton();
-            this.imagebox = new System.Windows.Forms.PictureBox();
             this.cboTenCD = new DevExpress.XtraEditors.ComboBoxEdit();
             this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
@@ -87,7 +87,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtmNgaySinh.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtmNgaySinh.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboGioiTinh.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imagebox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboTenCD.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCMND.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDiaChi.Properties)).BeginInit();
@@ -346,12 +345,12 @@
             // 
             this.groupControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupControl1.Controls.Add(this.btnUpdateHinhAnh);
             this.groupControl1.Controls.Add(this.btnHuy);
             this.groupControl1.Controls.Add(this.btnLuu);
             this.groupControl1.Controls.Add(this.dtmNgaySinh);
             this.groupControl1.Controls.Add(this.cboGioiTinh);
             this.groupControl1.Controls.Add(this.btnDuyetAnh);
-            this.groupControl1.Controls.Add(this.imagebox);
             this.groupControl1.Controls.Add(this.cboTenCD);
             this.groupControl1.Controls.Add(this.labelControl8);
             this.groupControl1.Controls.Add(this.labelControl9);
@@ -372,6 +371,18 @@
             this.groupControl1.Size = new System.Drawing.Size(846, 242);
             this.groupControl1.TabIndex = 10;
             this.groupControl1.Text = "Điền các thông tin";
+            // 
+            // btnUpdateHinhAnh
+            // 
+            this.btnUpdateHinhAnh.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton2.ImageOptions.Image")));
+            this.btnUpdateHinhAnh.Location = new System.Drawing.Point(437, 194);
+            this.btnUpdateHinhAnh.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnUpdateHinhAnh.Name = "btnUpdateHinhAnh";
+            this.btnUpdateHinhAnh.Size = new System.Drawing.Size(138, 32);
+            this.btnUpdateHinhAnh.TabIndex = 42;
+            this.btnUpdateHinhAnh.Text = "Xem Hình Ảnh";
+            this.btnUpdateHinhAnh.Visible = false;
+            this.btnUpdateHinhAnh.Click += new System.EventHandler(this.simpleButton2_Click);
             // 
             // btnHuy
             // 
@@ -439,23 +450,13 @@
             // 
             this.btnDuyetAnh.Enabled = false;
             this.btnDuyetAnh.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnDuyetAnh.ImageOptions.Image")));
-            this.btnDuyetAnh.Location = new System.Drawing.Point(27, 182);
+            this.btnDuyetAnh.Location = new System.Drawing.Point(31, 85);
             this.btnDuyetAnh.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnDuyetAnh.Name = "btnDuyetAnh";
-            this.btnDuyetAnh.Size = new System.Drawing.Size(158, 34);
+            this.btnDuyetAnh.Size = new System.Drawing.Size(157, 34);
             this.btnDuyetAnh.TabIndex = 37;
             this.btnDuyetAnh.Text = "Cập nhật hình ảnh";
             this.btnDuyetAnh.Click += new System.EventHandler(this.simpleButton4_Click);
-            // 
-            // imagebox
-            // 
-            this.imagebox.Location = new System.Drawing.Point(27, 37);
-            this.imagebox.Margin = new System.Windows.Forms.Padding(2);
-            this.imagebox.Name = "imagebox";
-            this.imagebox.Size = new System.Drawing.Size(156, 142);
-            this.imagebox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.imagebox.TabIndex = 36;
-            this.imagebox.TabStop = false;
             // 
             // cboTenCD
             // 
@@ -653,7 +654,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtmNgaySinh.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtmNgaySinh.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboGioiTinh.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imagebox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboTenCD.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCMND.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDiaChi.Properties)).EndInit();
@@ -706,7 +706,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colNguoiThans;
         private DevExpress.XtraGrid.Columns.GridColumn colNguoiThans1;
         private DevExpress.XtraEditors.ComboBoxEdit cboTenCD;
-        private System.Windows.Forms.PictureBox imagebox;
         private DevExpress.XtraEditors.SimpleButton btnDuyetAnh;
         private DevExpress.XtraEditors.DateEdit dtmNgaySinh;
         private DevExpress.XtraEditors.ComboBoxEdit cboGioiTinh;
@@ -715,5 +714,6 @@
         private DevExpress.XtraEditors.SimpleButton btnUpdate;
         private DevExpress.XtraEditors.SimpleButton btnExport;
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        private DevExpress.XtraEditors.SimpleButton btnUpdateHinhAnh;
     }
 }

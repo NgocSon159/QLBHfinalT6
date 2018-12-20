@@ -74,7 +74,8 @@
             this.Controls.Add(this.radioGroup1);
             this.Controls.Add(this.label1);
             this.Name = "FormChonOffOn";
-            this.Text = "FormChonOffOn";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Chọn cách thức kết nối";
             ((System.ComponentModel.ISupportInitialize)(this.radioGroup1.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

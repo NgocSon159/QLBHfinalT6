@@ -16,10 +16,12 @@ namespace QuanLyBaoHiem.Models
         public virtual DbSet<ChucVu> ChucVus { get; set; }
         public virtual DbSet<ChuKyThanhToan> ChuKyThanhToans { get; set; }
         public virtual DbSet<GoiHopDong> GoiHopDongs { get; set; }
+        public virtual DbSet<HinhAnh> HinhAnhs { get; set; }
         public virtual DbSet<HopDong> HopDongs { get; set; }
         public virtual DbSet<KhachHang> KhachHangs { get; set; }
         public virtual DbSet<NguoiThan> NguoiThans { get; set; }
         public virtual DbSet<NhanVien> NhanViens { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<ChiTietThanhPhanHopDong> ChiTietThanhPhanHopDongs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -51,6 +53,14 @@ namespace QuanLyBaoHiem.Models
             modelBuilder.Entity<GoiHopDong>()
                 .Property(e => e.GiaTriBaoHiem)
                 .HasPrecision(19, 3);
+
+            modelBuilder.Entity<HinhAnh>()
+                .Property(e => e.MaHA)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<HinhAnh>()
+                .Property(e => e.MaKH)
+                .IsUnicode(false);
 
             modelBuilder.Entity<HopDong>()
                 .Property(e => e.MaHD)

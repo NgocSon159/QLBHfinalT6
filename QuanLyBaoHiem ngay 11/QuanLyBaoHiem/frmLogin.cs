@@ -155,7 +155,7 @@ namespace QuanLyBaoHiem
                         frmMain frmMain = new frmMain(txtUser.Text,MahoaMD5.getMd5Hash(txtPass.Text));
                         frmMain.phanquyenTruongPhong();             //phan quyen admin, trưởng phòng
                         frmMain.Show();
-                        
+                        frmMain.loadghinhothongbao();
                         this.Hide();
                     }
                     if (dangnhapdaoo.dangnhap(txtUser.Text, txtPass.Text).Equals("QL"))
@@ -165,7 +165,7 @@ namespace QuanLyBaoHiem
                         frmMain frmMain = new frmMain(txtUser.Text, MahoaMD5.getMd5Hash(txtPass.Text));
                         frmMain.phanquyenQuanLy();             //phan quyen quản lý
                         frmMain.Show();
-                        
+                        frmMain.loadghinhothongbao();
                         this.Hide();
                     }
                     if (dangnhapdaoo.dangnhap(txtUser.Text, txtPass.Text).Equals("NV"))
@@ -175,7 +175,7 @@ namespace QuanLyBaoHiem
                         frmMain frmMain = new frmMain(txtUser.Text, MahoaMD5.getMd5Hash(txtPass.Text));
                         frmMain.phanquyenNhanVien();             //phan quyen nhân viên
                         frmMain.Show();
-                        
+                        frmMain.loadghinhothongbao();
                         this.Hide();
                     }
                     if(dangnhapdaoo.dangnhap(txtUser.Text, txtPass.Text).Equals("no"))
@@ -223,7 +223,7 @@ namespace QuanLyBaoHiem
                             frmMain frmMain = new frmMain(txtUser.Text, MahoaMD5.getMd5Hash(txtPass.Text));
                             frmMain.phanquyenTruongPhong();             //phan quyen admin
                             frmMain.Show();
-                            
+                            frmMain.loadghinhothongbao();
                             this.Hide();
                         }
                         if (dangnhapdaoo.dangnhap(txtUser.Text, txtPass.Text).Equals("QL"))
@@ -233,7 +233,7 @@ namespace QuanLyBaoHiem
                             frmMain frmMain = new frmMain(txtUser.Text, MahoaMD5.getMd5Hash(txtPass.Text));
                             frmMain.phanquyenQuanLy();             //phan quyen quản lý
                             frmMain.Show();
-                            
+                            frmMain.loadghinhothongbao();
                             this.Hide();
                         }
                         if (dangnhapdaoo.dangnhap(txtUser.Text, txtPass.Text).Equals("NV"))
@@ -243,7 +243,7 @@ namespace QuanLyBaoHiem
                             frmMain frmMain = new frmMain(txtUser.Text, MahoaMD5.getMd5Hash(txtPass.Text));
                             frmMain.phanquyenNhanVien();             //phan quyen user
                             frmMain.Show();
-                            
+                            frmMain.loadghinhothongbao();
                             this.Hide();
                         }
                         if (dangnhapdaoo.dangnhap(txtUser.Text, txtPass.Text).Equals("no"))

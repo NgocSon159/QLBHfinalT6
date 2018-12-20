@@ -18,7 +18,7 @@ namespace QuanLyBaoHiem
 {
     public partial class ucQuanLyThongTinKhachHang : DevExpress.XtraEditors.XtraUserControl
     {
-        public string imaloc = "";
+        public List<string> imaloc = new List<string>();
         public byte[] ima;
         public string manvhientai = "";
         public ucQuanLyThongTinKhachHang(string manvhientai1)
@@ -79,12 +79,14 @@ namespace QuanLyBaoHiem
                 {
                     btnLuu.Visible = false;
                     btnHuy.Visible = false;
+                    btnUpdateHinhAnh.Visible = false;
                 }
                 else
                 {
                     enabletextbox();
                     btnLuu.Visible = true;
                     btnHuy.Visible = true;
+                    btnUpdateHinhAnh.Visible = true;
                 }
 
                 if (gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "GioiTinh").Equals(true))
@@ -109,10 +111,10 @@ namespace QuanLyBaoHiem
                 if (result.HinhAnh != null)
                 {
                     MemoryStream ms = new MemoryStream(result.HinhAnh);
-                    imagebox.Image = Image.FromStream(ms);
+                   
                     ima = result.HinhAnh;
                 }
-                else imagebox.Image = null;
+               
             }
             catch(Exception ex)
             {
@@ -193,11 +195,13 @@ namespace QuanLyBaoHiem
                 OpenFileDialog dlg = new OpenFileDialog();
                 dlg.Filter = "JPG Files (*.jpg)|*.jpg|BMP Files (*.bmp)|*.bmp";
                 dlg.Title = "Chọn hình ảnh";
-                if (dlg.ShowDialog() == DialogResult.OK)
+                dlg.Multiselect = true;
+                if (dlg.ShowDialog(this) == DialogResult.OK)
                 {
-                    imaloc = dlg.FileName.ToString();
-                    imagebox.ImageLocation = imaloc;
-                    xulychuoibinary();
+                    foreach (var item in dlg.FileNames)
+                    {
+                        imaloc.Add(item);
+                    }
                 }
             }
             catch (Exception ex)
@@ -205,26 +209,26 @@ namespace QuanLyBaoHiem
                 XtraMessageBox.Show(ex.Message, "Thông Báo");
             }
         }
-        internal void xulychuoibinary()
-        {
-            try
-            {
-                ima = null;
-                FileStream fs = new FileStream(imaloc, FileMode.Open, FileAccess.Read);
-                BinaryReader br = new BinaryReader(fs);
-                ima = br.ReadBytes((int)fs.Length);
-            }
-            catch(Exception ex)
-            {
-                XtraMessageBox.Show(ex.Message,"Thông Báo");
-            }
-        }
+        //internal void xulychuoibinary()
+        //{
+        //    try
+        //    {
+        //        ima = null;
+        //        FileStream fs = new FileStream(imaloc, FileMode.Open, FileAccess.Read);
+        //        BinaryReader br = new BinaryReader(fs);
+        //        ima = br.ReadBytes((int)fs.Length);
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        XtraMessageBox.Show(ex.Message,"Thông Báo");
+        //    }
+        //}
 
         public void resettextbox()
         {
             btnLuu.Visible = false;
             btnHuy.Visible = false;
-
+            btnUpdateHinhAnh.Visible = false;
             txtDiaChi.Text = "";
             txtMaKH.Text = "";
             txtTenKH.Text = "";
@@ -233,13 +237,14 @@ namespace QuanLyBaoHiem
             txtSdt.Text = "";
             cboGioiTinh.Text = "";
             dtmNgaySinh.Text = "";
-            imagebox.Image = null;
+            
         }
 
         private void btnHuy_Click(object sender, EventArgs e)
         {
             btnLuu.Visible = false;
             btnHuy.Visible = false;
+            btnUpdateHinhAnh.Enabled = false;
             disabletextbox();
             txtDiaChi.Text = "";
             txtMaKH.Text = "";
@@ -249,7 +254,7 @@ namespace QuanLyBaoHiem
             txtSdt.Text = "";
             cboGioiTinh.Text = "";
             dtmNgaySinh.Text = "";
-            imagebox.Image = null;
+            
         }
 
         private void btnLuu_Click(object sender, EventArgs e)
@@ -266,7 +271,7 @@ namespace QuanLyBaoHiem
                     KhachHangDao kh = new KhachHangDao();
                     CapDoDao cd = new CapDoDao();
                     MaCD = cd.MaCD(cboTenCD.Text);
-                    kh.suakhachhang(txtMaKH.Text, txtTenKH.Text, MaCD, dtmNgaySinh.DateTime, cboGioiTinh.Text, txtDiaChi.Text, txtSdt.Text, txtCMND.Text, ima);
+                    kh.suakhachhang(txtMaKH.Text, txtTenKH.Text, MaCD, dtmNgaySinh.DateTime, cboGioiTinh.Text, txtDiaChi.Text, txtSdt.Text, txtCMND.Text, imaloc);
                     XtraMessageBox.Show("Sửa Thành Công", "Thông Báo");
                     this.refresh();
                 }
@@ -360,6 +365,13 @@ namespace QuanLyBaoHiem
         private void simpleButton1_Click_1(object sender, EventArgs e)
         {
             textEdit1.Text = "";
+        }
+
+        private void simpleButton2_Click(object sender, EventArgs e)
+        {
+            XemHinhAnh xemHinhAnh = new XemHinhAnh(txtMaKH.Text,this);
+            xemHinhAnh.Show();
+            this.refresh();
         }
     }
 }

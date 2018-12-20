@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DevExpress.XtraEditors;
+using QuanLyBaoHiem.DAO;
 using QuanLyBaoHiem.Models;
 namespace Model.Dao
 {
@@ -34,7 +35,7 @@ namespace Model.Dao
         {
             return db.KhachHangs.Where(x => x.Status == true).Where(x => x.TenKH.Contains(TenKH)).ToList();
         }
-        public void ThemKH(string MaKH,string TenKH,string MaCD,string NgaySinh,string GioiTinh,string DiaChi,string sdt,string CMND,string hinhanh)
+        public void ThemKH(string MaKH,string TenKH,string MaCD,string NgaySinh,string GioiTinh,string DiaChi,string sdt,string CMND,List<string> hinhanh)
         {
             KhachHang kh = new KhachHang();
             kh.MaKH = MaKH;
@@ -53,14 +54,29 @@ namespace Model.Dao
             kh.Sdt = sdt;
             kh.Status = true;
             kh.CMND = CMND;
-            if(hinhanh!=null)
+            db.KhachHangs.Add(kh);
+            if (hinhanh!=null)
             {
-                FileStream f = new FileStream(hinhanh, FileMode.Open, FileAccess.Read);
-                BinaryReader br = new BinaryReader(f);
-                kh.HinhAnh = br.ReadBytes((int)f.Length);
+                foreach(var item in hinhanh)
+                {
+                    HinhAnhDao hinhAnhDao = new HinhAnhDao();
+                    HinhAnh ha = new HinhAnh();
+
+                    ha.KhachHang = kh;
+                    ha.MaKH = kh.MaKH;
+                    ha.MaHA = hinhAnhDao.getlasthinhanh();
+                    FileStream f = new FileStream(item, FileMode.Open, FileAccess.Read);
+                    BinaryReader br = new BinaryReader(f);
+                    ha.HinhAnh1 = br.ReadBytes((int)f.Length);
+                    ha.Status = true;
+                    db.HinhAnhs.Add(ha);
+                    db.SaveChanges();
+                }
+                
+            
             }
             
-            db.KhachHangs.Add(kh);
+            
             db.SaveChanges();
         }
         public void xoakhachhang(string MaKH)
@@ -73,7 +89,7 @@ namespace Model.Dao
         {
             return db.KhachHangs.FirstOrDefault(x => x.MaKH == MaKH).MaCD;
         }
-        public void suakhachhang(string MaKH, string TenKH, string MaCD, DateTime NgaySinh, string GioiTinh, string DiaChi, string sdt, string CMND, byte[] hinhanh)
+        public void suakhachhang(string MaKH, string TenKH, string MaCD, DateTime NgaySinh, string GioiTinh, string DiaChi, string sdt, string CMND, List<string> hinhanh)
         {
             var kh = db.KhachHangs.FirstOrDefault(x => x.MaKH == MaKH);
             kh.MaCD = MaCD;
@@ -92,7 +108,7 @@ namespace Model.Dao
             kh.DiaChi = DiaChi;
             kh.Sdt = sdt;
             kh.CMND = CMND;
-            kh.HinhAnh = hinhanh;
+            //kh.HinhAnh = hinhanh;
             db.SaveChanges();
         }
 

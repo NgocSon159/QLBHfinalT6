@@ -157,25 +157,28 @@
     <Compile Include="frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="DAO\HinhAnhDao.cs" />
     <Compile Include="Linhtinh\ConectionStringStatic.cs" />
     <Compile Include="Linhtinh\EmailSupport.cs" />
     <Compile Include="Linhtinh\ExcelSuport.cs" />
     <Compile Include="Linhtinh\ImportExcel.cs" />
     <Compile Include="Linhtinh\MahoaMD5.cs" />
     <Compile Include="Linhtinh\XuatfileExcelmau.cs" />
-    <Compile Include="ThongBao\Birthday.cs" />
-    <Compile Include="ThongBao\ThongBaoHopDong.cs" />
-    <Compile Include="ModelDoanhThu\DoanhThu.cs" />
     <Compile Include="Models\CapDo.cs" />
     <Compile Include="Models\ChiTietThanhPhanHopDong.cs" />
     <Compile Include="Models\ChucVu.cs" />
     <Compile Include="Models\ChuKyThanhToan.cs" />
     <Compile Include="Models\GoiHopDong.cs" />
+    <Compile Include="Models\HinhAnh.cs" />
     <Compile Include="Models\HopDong.cs" />
     <Compile Include="Models\KhachHang.cs" />
     <Compile Include="Models\NguoiThan.cs" />
     <Compile Include="Models\NhanVien.cs" />
     <Compile Include="Models\QLBHContext.cs" />
+    <Compile Include="Models\sysdiagram.cs" />
+    <Compile Include="ThongBao\Birthday.cs" />
+    <Compile Include="ThongBao\ThongBaoHopDong.cs" />
+    <Compile Include="ModelDoanhThu\DoanhThu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuanLiBaoHiemDataSet.Designer.cs">
@@ -321,6 +324,12 @@
     <Compile Include="ucThongTinChuKyThanhToan.Designer.cs">
       <DependentUpon>ucThongTinChuKyThanhToan.cs</DependentUpon>
     </Compile>
+    <Compile Include="XemHinhAnh.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="XemHinhAnh.designer.cs">
+      <DependentUpon>XemHinhAnh.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -424,6 +433,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucThongTinChuKyThanhToan.resx">
       <DependentUpon>ucThongTinChuKyThanhToan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="XemHinhAnh.resx">
+      <DependentUpon>XemHinhAnh.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config">
       <SubType>Designer</SubType>

@@ -13,7 +13,7 @@ namespace QuanLyBaoHiem
 {
     public partial class ThemKH : DevExpress.XtraEditors.XtraForm
     {
-        public string imaloc;
+        public List<string> imaloc=new List<string>();
         public ucQuanLyThongTinKhachHang f;
         public ThemKH(ucQuanLyThongTinKhachHang ff)
         {
@@ -35,10 +35,13 @@ namespace QuanLyBaoHiem
                 OpenFileDialog dlg = new OpenFileDialog();
                 dlg.Filter = "JPG Files (*.jpg)|*.jpg|BMP Files (*.bmp)|*.bmp";
                 dlg.Title = "Chọn hình ảnh";
-                if (dlg.ShowDialog() == DialogResult.OK)
+                dlg.Multiselect = true;
+                if (dlg.ShowDialog(this) == DialogResult.OK)
                 {
-                    imaloc = dlg.FileName.ToString();
-                    imagebox.ImageLocation = imaloc;
+                    foreach(var item in dlg.FileNames)
+                    {
+                        imaloc.Add(item);
+                    }
                 }
             }
             catch (Exception ex)

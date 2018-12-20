@@ -12,6 +12,7 @@ namespace QuanLyBaoHiem.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public KhachHang()
         {
+            HinhAnhs = new HashSet<HinhAnh>();
             HopDongs = new HashSet<HopDong>();
             ChiTietThanhPhanHopDongs = new HashSet<ChiTietThanhPhanHopDong>();
             NguoiThans = new HashSet<NguoiThan>();
@@ -46,6 +47,9 @@ namespace QuanLyBaoHiem.Models
         public bool? Status { get; set; }
 
         public virtual CapDo CapDo { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HinhAnh> HinhAnhs { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HopDong> HopDongs { get; set; }

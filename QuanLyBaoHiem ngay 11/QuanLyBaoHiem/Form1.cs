@@ -107,7 +107,7 @@ namespace QuanLyBaoHiem
             matkhauhientai = matkhau;
             tattab();
             this.Text += " ["+taikhoanhientai+"]" ;
-            loadghinhothongbao();
+            //loadghinhothongbao();
         }
 
 

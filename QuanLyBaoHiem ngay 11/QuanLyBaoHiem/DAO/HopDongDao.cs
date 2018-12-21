@@ -104,7 +104,15 @@ namespace Model.Dao
             hd.MaHD = MaHD;
             hd.MaGoiHD = MaGHD;
             hd.MaChuKy = MaCK;
-            hd.MaNV = MaNV;
+            if(MaNV=="")
+            {
+                hd.MaNV = null;
+            }
+            else
+            {
+                hd.MaNV = MaNV;
+            }
+            
             hd.MaKHChinh = MaKH;
             hd.NgayHieuLuc = Convert.ToDateTime(NgayHL);
             hd.Status = true;
@@ -117,7 +125,15 @@ namespace Model.Dao
             var hd = db.HopDongs.FirstOrDefault(x => x.MaHD == MaHD);
             hd.MaGoiHD = MaGHD;
             hd.MaChuKy = MaCK;
-            hd.MaNV = MaNV;
+            if(MaNV=="")
+            {
+                hd.MaNV = null;
+            }
+            else
+            {
+                hd.MaNV = MaNV;
+            }
+            
             hd.MaKHChinh = MaKH;
             hd.NgayHieuLuc = NgayHL;
             db.SaveChanges();

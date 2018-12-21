@@ -16,7 +16,7 @@ namespace QuanLyBaoHiem
     public partial class frmMain : DevExpress.XtraBars.Ribbon.RibbonForm
     {
 
-        //public static string user;
+        public string chedo = "";
         
 
 
@@ -110,6 +110,27 @@ namespace QuanLyBaoHiem
             //loadghinhothongbao();
         }
 
+
+        public frmMain (string offline,string tentaikhoan,string x)
+        {
+            InitializeComponent();
+            DisEndMenuLogin(true);
+            if (offline == "offline")
+            {
+                chedo = offline;
+                ribbonPage3.Visible = false;
+                btnQuanLyChucVu.Links[0].Visible = false;
+                btnThongTinGoiHopDong.Links[0].Visible = false;
+                btnThongTinChuKyThanhToan.Links[0].Visible = false;
+                btnQuanLyCapDoKH.Links[0].Visible = false;
+                btnQuanlyCapdo.Links[0].Visible = false;
+                ribbonPage8.Visible = false;
+                ribbonThongke.Visible = false;
+                ribbonPage7.Visible = false;
+                ribbonPhuchoi.Visible = false;
+            }
+            tattab();
+        }
 
         //bien IdLogin de sau nay phat trien lam phan quyen;
         public void DisEndMenuLogin(bool e)
@@ -284,8 +305,17 @@ namespace QuanLyBaoHiem
 
         private void btnQuanLyThongTinNV_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            ucQuanLyThongTinNhanVien ucKhachHang = new ucQuanLyThongTinNhanVien(taikhoanhientai);
-            AddTabControl(ucKhachHang, "Quản Lý Nhân Viên", "");
+            if(chedo=="offline")
+            {
+                ucQuanLyThongTinNhanVien ucKhachHang = new ucQuanLyThongTinNhanVien("offline","x");
+                AddTabControl(ucKhachHang, "Quản Lý Nhân Viên", "");
+            }
+            else
+            {
+                ucQuanLyThongTinNhanVien ucKhachHang = new ucQuanLyThongTinNhanVien(taikhoanhientai);
+                AddTabControl(ucKhachHang, "Quản Lý Nhân Viên", "");
+            }
+            
         }
 
         private void btnThongTinKhachHang_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -319,8 +349,16 @@ namespace QuanLyBaoHiem
 
         private void btnHopDong_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            ucHopDong ucHopDongg = new ucHopDong(taikhoanhientai);
-            AddTabControl(ucHopDongg, "Hợp đồng", "");
+            if (chedo == "offline")
+            {
+                ucHopDong ucHopDongg = new ucHopDong("offline","x");
+                AddTabControl(ucHopDongg, "Hợp đồng", "");
+            }
+            else
+            {
+                ucHopDong ucHopDongg = new ucHopDong(taikhoanhientai);
+                AddTabControl(ucHopDongg, "Hợp đồng", "");
+            }
         }
 
         private void btnThongTinChinhSachBaoHiem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

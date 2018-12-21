@@ -161,11 +161,11 @@ namespace QuanLyBaoHiem
                     if (dangnhapdaoo.dangnhap(txtUser.Text, txtPass.Text).Equals("QL"))
                     {
                         ghinhotaikhoanvapass();
-                        ghinhotaikhoanthongbao();
+                        //ghinhotaikhoanthongbao();
                         frmMain frmMain = new frmMain(txtUser.Text, MahoaMD5.getMd5Hash(txtPass.Text));
                         frmMain.phanquyenQuanLy();             //phan quyen quản lý
                         frmMain.Show();
-                        frmMain.loadghinhothongbao();
+                        //frmMain.loadghinhothongbao();
                         this.Hide();
                     }
                     if (dangnhapdaoo.dangnhap(txtUser.Text, txtPass.Text).Equals("NV"))
@@ -229,11 +229,11 @@ namespace QuanLyBaoHiem
                         if (dangnhapdaoo.dangnhap(txtUser.Text, txtPass.Text).Equals("QL"))
                         {
                             ghinhotaikhoanvapass();
-                            ghinhotaikhoanthongbao();
+                            //ghinhotaikhoanthongbao();
                             frmMain frmMain = new frmMain(txtUser.Text, MahoaMD5.getMd5Hash(txtPass.Text));
                             frmMain.phanquyenQuanLy();             //phan quyen quản lý
                             frmMain.Show();
-                            frmMain.loadghinhothongbao();
+                            //frmMain.loadghinhothongbao();
                             this.Hide();
                         }
                         if (dangnhapdaoo.dangnhap(txtUser.Text, txtPass.Text).Equals("NV"))

@@ -21,6 +21,7 @@ namespace QuanLyBaoHiem
         QLBHContext db = new QLBHContext();
         public string manvhientai = "";
         List<ChucVu> listchucvu = new List<ChucVu>();
+        string chedo = "";
         public ucQuanLyThongTinNhanVien()
         {
             InitializeComponent();
@@ -64,6 +65,27 @@ namespace QuanLyBaoHiem
         }
 
 
+        public ucQuanLyThongTinNhanVien (string chedo1,string x)
+        {
+            if(chedo1 == "offline")
+            {
+                chedo = chedo1;
+                InitializeComponent();
+                QuanLyBaoHiem.Models.QLBHContext dbContext = new QuanLyBaoHiem.Models.QLBHContext();
+                // Call the LoadAsync method to asynchronously get the data for the given DbSet from the database.
+                dbContext.NhanViens.LoadAsync().ContinueWith(loadTask =>
+                {
+                    // Bind data to control when loading complete
+                    dgvNhanVien.DataSource = dbContext.NhanViens.Where(p => p.Status == true).ToList();
+                }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
+
+
+
+
+                loadcomboboxMaCVvacomboboxQuyenhanvacomboboxMaNVQL();
+            }
+        }
+
         public void loadcomboboxMaCVvacomboboxQuyenhanvacomboboxMaNVQL()
         {
             var listmacv = db.ChucVus.ToList();
@@ -97,29 +119,64 @@ namespace QuanLyBaoHiem
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            QuanLyBaoHiem.Models.QLBHContext dbContext = new QuanLyBaoHiem.Models.QLBHContext();
-
-            // Call the LoadAsync method to asynchronously get the data for the given DbSet from the database.
-            dbContext.NhanViens.LoadAsync().ContinueWith(loadTask =>
+            if(chedo!="offline")
             {
-                // Bind data to control when loading complete
-                dgvNhanVien.DataSource = dbContext.NhanViens.Where(p => p.Status == true).Where(p => p.MaNVQuanLi == manvhientai).ToList();
-            }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
-            disabletextbox();
-            resettextbox();
+                QuanLyBaoHiem.Models.QLBHContext dbContext = new QuanLyBaoHiem.Models.QLBHContext();
+
+                // Call the LoadAsync method to asynchronously get the data for the given DbSet from the database.
+                dbContext.NhanViens.LoadAsync().ContinueWith(loadTask =>
+                {
+                    // Bind data to control when loading complete
+                    dgvNhanVien.DataSource = dbContext.NhanViens.Where(p => p.Status == true).Where(p => p.MaNVQuanLi == manvhientai).ToList();
+                }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
+                disabletextbox();
+                resettextbox();
+            }
+            else
+            {
+                QuanLyBaoHiem.Models.QLBHContext dbContext = new QuanLyBaoHiem.Models.QLBHContext();
+
+                // Call the LoadAsync method to asynchronously get the data for the given DbSet from the database.
+                dbContext.NhanViens.LoadAsync().ContinueWith(loadTask =>
+                {
+                    // Bind data to control when loading complete
+                    dgvNhanVien.DataSource = dbContext.NhanViens.Where(p => p.Status == true).ToList();
+                }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
+                disabletextbox();
+                resettextbox();
+            }
+
+
+            
         }
 
         public void loadlaigridview()
 
         {
-            QuanLyBaoHiem.Models.QLBHContext dbContext = new QuanLyBaoHiem.Models.QLBHContext();
-
-            // Call the LoadAsync method to asynchronously get the data for the given DbSet from the database.
-            dbContext.NhanViens.LoadAsync().ContinueWith(loadTask =>
+            if(chedo!="offline")
             {
-                // Bind data to control when loading complete
-                dgvNhanVien.DataSource = dbContext.NhanViens.Where(p => p.Status == true).Where(p => p.MaNVQuanLi ==  manvhientai).ToList();
-            }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
+                QuanLyBaoHiem.Models.QLBHContext dbContext = new QuanLyBaoHiem.Models.QLBHContext();
+
+                // Call the LoadAsync method to asynchronously get the data for the given DbSet from the database.
+                dbContext.NhanViens.LoadAsync().ContinueWith(loadTask =>
+                {
+                    // Bind data to control when loading complete
+                    dgvNhanVien.DataSource = dbContext.NhanViens.Where(p => p.Status == true).Where(p => p.MaNVQuanLi == manvhientai).ToList();
+                }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
+            }
+            else
+            {
+                QuanLyBaoHiem.Models.QLBHContext dbContext = new QuanLyBaoHiem.Models.QLBHContext();
+
+                // Call the LoadAsync method to asynchronously get the data for the given DbSet from the database.
+                dbContext.NhanViens.LoadAsync().ContinueWith(loadTask =>
+                {
+                    // Bind data to control when loading complete
+                    dgvNhanVien.DataSource = dbContext.NhanViens.Where(p => p.Status == true).ToList();
+                }, System.Threading.Tasks.TaskScheduler.FromCurrentSynchronizationContext());
+            }
+
+            
         }
         private void cboMaCV_TextChanged(object sender, EventArgs e)
         {
@@ -142,7 +199,12 @@ namespace QuanLyBaoHiem
                 cboQuyenHan.Text = listchucvu.Where(p => p.MaCV == macv).Select(l => l.TenCV).SingleOrDefault();
 
                 txtSdt.Text = gridView1.GetFocusedRowCellValue(colSdt).ToString();
-                txtEmail.Text = gridView1.GetFocusedRowCellValue(colEmail).ToString();
+                if(gridView1.GetFocusedRowCellValue(colEmail) != null)
+                {
+                    txtEmail.Text = gridView1.GetFocusedRowCellValue(colEmail).ToString();
+                }
+                
+
                 string gioitinh = gridView1.GetFocusedRowCellValue(colGioiTinh).ToString();
 
                 if (gioitinh.Equals("True"))
@@ -151,7 +213,11 @@ namespace QuanLyBaoHiem
                 }
                 else cboGioiTinh.SelectedIndex = 1;
                 txtDiaChi.Text = gridView1.GetFocusedRowCellValue(colDiaChi).ToString();
-                cboMaNVQL.Text = gridView1.GetFocusedRowCellValue(colMaNVQL).ToString();
+                if(gridView1.GetFocusedRowCellValue(colMaNVQL) != null)
+                {
+                    cboMaNVQL.Text = gridView1.GetFocusedRowCellValue(colMaNVQL).ToString();
+                }
+                
 
                 string ngaysinh = gridView1.GetFocusedRowCellValue(colNgaySinh).ToString();
                 DateTime ngaysinhnhat = DateTime.Parse(ngaysinh);
@@ -221,8 +287,17 @@ namespace QuanLyBaoHiem
 
         private void btnThemNV_Click(object sender, EventArgs e)
         {
-            FormThemNhanVien f = new FormThemNhanVien(this);
-            f.ShowDialog();
+            if(chedo!="offline")
+            {
+                FormThemNhanVien f = new FormThemNhanVien(this,"online");
+                f.ShowDialog();
+            }
+            else
+            {
+                FormThemNhanVien f = new FormThemNhanVien(this,"offline");
+                f.ShowDialog();
+            }
+            
         }
 
         private void btnXoa_Click(object sender, EventArgs e)

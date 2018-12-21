@@ -64,7 +64,7 @@ namespace QuanLyBaoHiem
         {
             try
             {
-                if(cboMaCK.Text==""||cboMaGHD.Text==""||txtMaHD.Text==""||cboMaKH.Text==""||txtMaNV.Text==""||dtmNgayHL.Text=="")
+                if(cboMaCK.Text==""||cboMaGHD.Text==""||txtMaHD.Text==""||cboMaKH.Text==""||dtmNgayHL.Text=="")
                 {
                     XtraMessageBox.Show("Bạn chưa điền đầy đủ thông tin!!");
                 }

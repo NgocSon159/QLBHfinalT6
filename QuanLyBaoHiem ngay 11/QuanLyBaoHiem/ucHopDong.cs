@@ -19,6 +19,8 @@ namespace QuanLyBaoHiem
     public partial class ucHopDong : DevExpress.XtraEditors.XtraUserControl
     {
         public string manvhientai = "";
+        public string chedo = "";
+
         public ucHopDong()
         {
             InitializeComponent();
@@ -53,12 +55,24 @@ namespace QuanLyBaoHiem
             
         }
 
+        public ucHopDong(string chedo1, string x)
+        {
+            chedo = chedo1;
+            InitializeComponent();
+            loadcombo();
+        }
+
         public void loaddatabase()
         {
             HopDongDao hd = new HopDongDao();
             NhanvienDao nvd = new NhanvienDao();
 
-            hopDongsBindingSource.DataSource = hd.loadtheoyeucau(nvd.getchucvutunhanvien(manvhientai), manvhientai);
+            if (chedo != "offline")
+                hopDongsBindingSource.DataSource = hd.loadtheoyeucau(nvd.getchucvutunhanvien(manvhientai), manvhientai);
+            else
+            {
+                hopDongsBindingSource.DataSource = hd.Load();
+            }
         }
 
         public void loadcombo()
@@ -238,7 +252,7 @@ namespace QuanLyBaoHiem
         {
             try
             {
-                if (txtMaHD.Text == "" || cboMaGoiHD.Text == "" || cboMaChuKy.Text == "" || cboMaKH.Text == "" || txtMaNV.Text == "" || dtmNgayHieuLuc.Text == "")
+                if (txtMaHD.Text == "" || cboMaGoiHD.Text == "" || cboMaChuKy.Text == "" || cboMaKH.Text == ""  || dtmNgayHieuLuc.Text == "")
                 {
                     XtraMessageBox.Show("Điền Đầy Đủ Thông Tin","Thông báo");
                 }
@@ -248,7 +262,7 @@ namespace QuanLyBaoHiem
                     NhanvienDao nvd = new NhanvienDao();
                     hd.SuaHD(txtMaHD.Text, cboMaGoiHD.Text, cboMaChuKy.Text, txtMaNV.Text, cboMaKH.Text, dtmNgayHieuLuc.DateTime);
                     XtraMessageBox.Show("Sửa thành công", "Thông báo");
-                    hopDongsBindingSource.DataSource = hd.loadtheoyeucau(nvd.getchucvutunhanvien(manvhientai), manvhientai);
+                    loaddatabase();
                     txtGiaTriBaoHiem.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "GoiHopDong.GiaTriBaoHiem").ToString();
 
                 }

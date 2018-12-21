@@ -41,9 +41,14 @@ namespace QuanLyBaoHiem
                 config.Save();
 
                 ConfigurationManager.RefreshSection("connectionStrings");
-                frmLogin f = new frmLogin();
+                //frmLogin f = new frmLogin();
                 this.Hide();
+                //f.Show();
+
+
+                frmMain f = new frmMain("offline","abc","x");
                 f.Show();
+
             }
             
         }

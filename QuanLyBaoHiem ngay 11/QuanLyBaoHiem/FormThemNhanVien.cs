@@ -19,16 +19,21 @@ namespace QuanLyBaoHiem
         QLBHContext db = new QLBHContext();
         List<ChucVu> listchucvu = new List<ChucVu>();
         ucQuanLyThongTinNhanVien f = new ucQuanLyThongTinNhanVien();
+        string chedo = "";
         public FormThemNhanVien()
         {
             InitializeComponent();
             
         }
-        public FormThemNhanVien(ucQuanLyThongTinNhanVien ff)
+        public FormThemNhanVien(ucQuanLyThongTinNhanVien ff,string chedo1)
         {
             InitializeComponent();
-            
+            chedo = chedo1;
             f = ff;
+            if(chedo1=="offline")
+            {
+                cboQuyenHan.Enabled = true;
+            }
         }
 
 
@@ -98,7 +103,15 @@ namespace QuanLyBaoHiem
                     }
                     nv.GioiTinh = gioitinh;
                     nv.NgaySinh = dtngaysinh.DateTime; ;
-                    nv.MaNVQuanLi = txtMaNVQL.Text;
+                    if(txtMaNVQL.Text=="")
+                    {
+                        nv.MaNVQuanLi = null;
+                    }
+                    else
+                    {
+                        nv.MaNVQuanLi = txtMaNVQL.Text;
+                    }
+                    
                     nv.DiaChi = txtDiaChi.Text;
                     nv.Sdt = txtSdt.Text; ;
                     nv.MatKhau = MahoaMD5.getMd5Hash("123456");
